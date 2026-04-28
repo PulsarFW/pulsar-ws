@@ -1,0 +1,47 @@
+name: Create release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+permissions:
+  contents: write
+
+jobs:
+  create-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get latest code
+        uses: actions/checkout@v4
+
+      - name: Bundle files
+        run: |
+          mkdir -p ./temp/pulsar-ws
+          cp ./{README.md,fxmanifest.lua,package.json,yarn.lock,server.js} ./temp/pulsar-ws
+          cp -r ./namespaces ./temp/pulsar-ws
+          cd ./temp && zip -r ../pulsar-ws.zip ./pulsar-ws
+
+      - name: Create release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: "PULSAR-WS ${{ github.ref_name }}"
+          body: |
+            ![Pulsar Framework](https://r2.fivemanage.com/GPYOH8Hq4GPyAY7czrgLe/pulsarbanner.png)
+
+            ## PULSAR-WS ${{ github.ref_name }}
+
+            Secure WebSocket server for real-time external communication for Pulsar Framework.
+
+            ### Installation
+            1. Download `pulsar-ws.zip` below
+            2. Extract into your server's `resources` folder
+            3. Place your `cert.pem` and `key.pem` SSL certificate files in the resource folder
+            4. Run `yarn install` inside the resource folder
+            5. Add `ensure pulsar-ws` to your `server.cfg`
+
+            ---
+            ![Pulsar Framework](https://img.shields.io/badge/Pulsar-Framework-7c3aed?style=flat-square)
+            ![Built for FiveM](https://img.shields.io/badge/Built_for-FiveM-F40552?style=flat-square)
+          files: pulsar-ws.zip
+          prerelease: false
