@@ -2,4 +2,3 @@
 .vscode/
 *.cfg
 node_modules/
-privkey.pem
