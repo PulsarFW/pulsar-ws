@@ -20,7 +20,7 @@ Socket.io-based WebSocket server running inside FiveM. Enables real-time two-way
 
 ## License
 
-Copyright © 2024 Pulsar Framework. All rights reserved.
+Copyright © 2026 Pulsar Framework. All rights reserved.
 
 <div align="center">
 
