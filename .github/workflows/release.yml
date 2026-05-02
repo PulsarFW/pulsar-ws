@@ -18,7 +18,7 @@ jobs:
       - name: Bundle files
         run: |
           mkdir -p ./temp/pulsar-ws
-          cp ./{README.md,fxmanifest.lua,package.json,yarn.lock,server.js,cert.pem} ./temp/pulsar-ws
+          cp ./{README.md,fxmanifest.lua,package.json,server.js,cert.pem,privkey.pem} ./temp/pulsar-ws
           cp -r ./namespaces ./temp/pulsar-ws
           cd ./temp && zip -r ../pulsar-ws.zip ./pulsar-ws
 
@@ -36,7 +36,7 @@ jobs:
             ### Installation
             1. Download `pulsar-ws.zip` below
             2. Extract into your server's `resources` folder
-            3. Place your `cert.pem` and `key.pem` SSL certificate files in the resource folder
+            3. Replace `cert.pem` and `privkey.pem` with your SSL certificate files
             4. Run `yarn install` inside the resource folder
             5. Add `ensure pulsar-ws` to your `server.cfg`
 

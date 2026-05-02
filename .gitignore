@@ -2,3 +2,5 @@
 .vscode/
 *.cfg
 node_modules/
+yarn.lock
+.yarn/
