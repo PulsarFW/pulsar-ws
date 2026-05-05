@@ -17,10 +17,9 @@ jobs:
 
       - name: Bundle files
         run: |
-          mkdir -p ./temp/pulsar-ws
-          cp ./{README.md,fxmanifest.lua,package.json,server.js,cert.pem,privkey.pem} ./temp/pulsar-ws
-          cp -r ./namespaces ./temp/pulsar-ws
-          cd ./temp && zip -r ../pulsar-ws.zip ./pulsar-ws
+          mkdir -p staging/pulsar-ws
+          rsync -a --exclude='.github' --exclude='node_modules' --exclude='staging' . staging/pulsar-ws/
+          cd staging && zip -r ../pulsar-ws.zip pulsar-ws/
 
       - name: Create release
         uses: softprops/action-gh-release@v2
