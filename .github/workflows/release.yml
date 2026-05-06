@@ -15,10 +15,13 @@ jobs:
       - name: Get latest code
         uses: actions/checkout@v4
 
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile --production
+
       - name: Bundle files
         run: |
           mkdir -p staging/pulsar-ws
-          rsync -a --exclude='.github' --exclude='node_modules' --exclude='staging' . staging/pulsar-ws/
+          rsync -a --exclude='.github' --exclude='staging' . staging/pulsar-ws/
           cd staging && zip -r ../pulsar-ws.zip pulsar-ws/
 
       - name: Create release
@@ -35,9 +38,8 @@ jobs:
             ### Installation
             1. Download `pulsar-ws.zip` below
             2. Extract into your server's `resources` folder
-            3. Replace `cert.pem` and `privkey.pem` with your SSL certificate files
-            4. Run `yarn install` inside the resource folder
-            5. Add `ensure pulsar-ws` to your `server.cfg`
+            3. Replace `cert.pem` and `key.pem` with your SSL certificate files
+            4. Add `ensure pulsar-ws` to your `server.cfg`
 
             ---
             ![Pulsar Framework](https://img.shields.io/badge/Pulsar-Framework-7c3aed?style=flat-square)
