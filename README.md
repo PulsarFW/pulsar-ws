@@ -1,30 +1,53 @@
 <div align="center">
-  <img src="https://r2.fivemanage.com/GPYOH8Hq4GPyAY7czrgLe/pulsarbanner.png" alt="Pulsar Framework" width="100%">
+
+<img src="https://r2.fivemanage.com/GPYOH8Hq4GPyAY7czrgLe/pulsarbanner.png" alt="Pulsar Framework" width="100%" />
+
+<br/>
 
 # PULSAR-WS
-**Secure WebSocket server for real-time external communication for Pulsar Framework**
 
-[![Node.js](https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=nodedotjs&logoColor=white)]()
-[![FiveM](https://img.shields.io/badge/FiveM-F40552?style=flat-square)]()
+### Standalone WebSocket bridge — TLS Socket.IO server for real-time push to external tools, starting with MDT alerts
 
-[Overview](#overview) • [Dependencies](#dependencies) • [License](#license)
+<br/>
+
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
+![FiveM](https://img.shields.io/badge/FiveM-F40552?style=flat-square)
+
+<br/>
+
+<sub>Enjoy the framework? A coffee helps keep active development, hardening, and support going.</sub>
+
+<a href="https://buymeacoffee.com/pulsarframework"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 50px !important;width: 180px !important;" /></a>
+
+<br/>
+
+[Overview](#overview) · [Dependencies](#dependencies)
+
 </div>
+
+---
 
 ## Overview
 
-Socket.io-based WebSocket server running inside FiveM. Enables real-time two-way communication with external applications (e.g. MDT alerts). Requires a valid SSL certificate pair (`cert.pem` / `key.pem`) placed in the resource folder.
+Server-only, plain Node.js (not `plsr` / not wired into `pulsar_core`). Runs a TLS Socket.IO server (`cert.pem`/`key.pem`) with JWT auth, one namespace per real-time feed — `namespaces/mdtAlerts.js` pushes MDT alerts out to whatever external client is listening.
+
+---
 
 ## Dependencies
 
-- [pulsar-core](https://github.com/PulsarFW/pulsar-core)
+None — standalone, connects out to `pulsar_mdt` at the application level, not as a resource dependency.
+
+---
 
 ## License
 
-Copyright © 2026 Pulsar Framework. All rights reserved.
+This resource is free to use and modify under the [Pulsar Framework License](LICENSE.md). Redistribution is welcome as long as it stays free — selling this resource or any derivative of it requires written permission from the Pulsar Framework team.
+
+---
 
 <div align="center">
 
-[![Pulsar Framework](https://img.shields.io/badge/Pulsar-Framework-7c3aed?style=flat-square)]()
-[![Built for FiveM](https://img.shields.io/badge/Built_for-FiveM-F40552?style=flat-square)]()
+![Pulsar Framework](https://img.shields.io/badge/Pulsar-Framework-7c3aed?style=flat-square)
+![Built for FiveM](https://img.shields.io/badge/Built_for-FiveM-F40552?style=flat-square)
 
 </div>

@@ -1,6 +1,9 @@
 const uuid = require("uuid");
 const mdtAlerts = io.of("/mdt-alerts");
 
+let MDT = null;
+let EmergencyAlerts = null;
+
 const alertGroupStyles = {
   police_alerts: 1,
   ems_alerts: 2,
@@ -10,7 +13,7 @@ const alertGroupStyles = {
 const defaultTypes = {
   police: "car",
   ems: "bus",
-  tow: "truck-tow",
+  tow: "truck-pickup",
   prison: "car",
 };
 
@@ -33,6 +36,24 @@ const typeNames = {
   lifeflight: "Life Flight",
   heat: "Heat",
 };
+
+AddEventHandler("Database:Shared:DependencyUpdate", RetrieveComponents);
+
+function RetrieveComponents() {
+  MDT = exports["pulsar_core"].FetchComponent("MDT");
+  EmergencyAlerts = exports["pulsar_core"].FetchComponent("EmergencyAlerts");
+}
+
+AddEventHandler("Core:Shared:Ready", () => {
+  exports["pulsar_core"].RequestDependencies(
+    "WebSockets",
+    ["MDT", "EmergencyAlerts"],
+    (error) => {
+      if (error.length > 0) return;
+      RetrieveComponents();
+    }
+  );
+});
 
 let units = {
   police: [
@@ -123,7 +144,8 @@ mdtAlerts.on("connection", (socket) => {
       socket.data.job = tData.job;
       socket.data.callsign = tData.callsign;
 
-      const playerData = exports["pulsar-mdt"].EmergencyAlertsGetUnitData(
+      const playerData = EmergencyAlerts.GetUnitData(
+        EmergencyAlerts,
         tData.source,
         tData.job
       );
